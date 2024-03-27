@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+
+<style>
+    input {
+    	font-size: 22px;
+    }
+    
+body {
+  font-family:'Candara' ;
+  margin: 0 auto;
+  max-width: 800px;
+  background: #113;
+}
+div {
+  height: 400px;
+  background-size: cover;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 32px;
+}
+h1 {
+  font-family: 'Londrina Shadow', Comic Sans;
+  text-align: center;
+  font-size: 75px;
+  color: #aae;
+  margin: 60px 0 0 0;
+}
+h2 {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  color: #1988BF;
+  margin: 0px 0 70px 0;
+  font-size: 50
+}
+p {
+  color: rgba(743,735,70,8);
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  padding: 11px;
+  line-height: 15px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 9px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 60px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+.first{
+  background-image: url("https://images.themodernproper.com/billowy-turkey/production/posts/2023/Fettuccine-Alfredo_7.jpg?w=960&h=720&q=82&fm=jpg&fit=crop&dm=1681837453&s=11e89dd58852739e8f661b850ebdf7e9");
+}
+.second{
+  background-image: url("https://cdn.media.amplience.net/i/japancentre/Recipe-22-takoyaki-octopus-balls/Takoyaki-octopus-balls?$poi$&w=1200&h=630&sm=c&fmt=auto");
+}
+.dessert{
+  background-image: url("https://natashaskitchen.com/wp-content/uploads/2023/04/Flan-Recipe-4.jpg");
+  background-size: 40%;
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 15px;
+  }
+  small {
+    font-size: 6px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Twinkies restaurant</h1>
+<h2>Mom's recipe </h2>
+<div class="first">
+    <input class="quantities" type="number" min="0" style="width: 50px"> 
+  <p> Fettuccine alfredo<span class="price">$24</span><br />
+  <small>Fettuccine Alfredo or fettuccine al burro is an Italian pasta dish of fresh fettuccine tossed with butter and Parmesan. As the cheese melts, it emulsifies the liquids to form a smooth and rich cheese sauce coating the pasta. </small></p>
+</div>
+
+<div class="second">
+    <input  class="quantities" type="number" min="0" style="width: 50px"> 
+  <p>Takoyaki squid balls<span class="price">$12</span><br />
+  <small>Takoyaki is a Japanese term for octopus grilled fried and they are a very popular yatai or mobile street food snack. These lightly fried octopus balls have a crisp outer shell with a soft and moist center filled with pieces of octopus, pickled ginger, green onions, and crunchy tenkasu.comes in 8 pieces.</small></p>
+</div>
+  
+<div class="dessert">
+    <input class="quantities" type="number" min="0" style="width: 50px"> 
+  <p>Creme caramel <span class="price">$18</span><br />
+  <small>Creme caramel, flan, caramel pudding, condensed milk pudding or caramel custard is a custard dessert with a layer of clear caramel sauce.</small></p>
+</div>
+
+<br><br>
+  <input id="Name" placeholder="Your name">
+  <input id="Email" placeholder="Your email">
+  <input id="submit" type="Submit">
+<br><br>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwPM_gV6wNW8BjsBCo9qbjzKM66PnDdrA",
+      authDomain: "aysha3-6f3c3.firebaseapp.com",
+      projectId: "aysha3-6f3c3",
+      storageBucket: "aysha3-6f3c3.appspot.com",
+      messagingSenderId: "261065205821",
+      appId: "1:261065205821:web:720ff927a982ccb66da254",
+      measurementId: "G-4Q7JWD0X3R"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app); 
+    
+    const Name = document.querySelector("#Name") 
+    const Email = document.querySelector("#Email")
+    document.querySelector('#submit').addEventListener('click', Submit)
+    const quantities = document.querySelectorAll(".quantities")
+    const itemsList = ["Fettuccine alfredo", "Takoyaki squid balls", "Creme caramel"]
+    const prices = document.querySelectorAll(".price") 
+
+	function Submit() {
+	  const timestamp = buildTimestamp()
+
+	  let total = 0 
+
+
+
+        
+        let cart = { }
+        for  (let i=0; i<quantities.length; i=i+1) {
+        	if (quantities[i].value != "0" && quantities[i].value != "") {	
+	            let price = prices[i].innerHTML.replace('$', '')
+			    total = total + quantities[i].value * price 
+        		cart[itemsList[i]] = parseInt(quantities[i].value) 
+        	}
+        	quantities[i].value = ""
+        }
+    
+      
+	  set(ref(db, timestamp), {
+		  Name: Name.value,
+	      email: Email.value,
+          cart: cart,
+          totalPrice: total,
+		  paid: "not yet",  
+	  });
+
+	  Name.value = ""
+	  Email.value = ""
+	}
+    
+    function buildTimestamp() {
+    	  const now = new Date();
+    	  let timestamp = now.getFullYear().toString() + "/";
+    	  //const month = now.toLocaleString('default', { month: 'long' });
+
+    	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+    	  month = month.toString()
+    	  month = addLeadingZero(month)
+    	  timestamp += month + "/"; 
+
+    	  let date = now.getDate().toString()
+    	  date = addLeadingZero(date)
+    	  timestamp += date + "/";
+
+    	  let hours = now.getHours().toString()
+    	  hours = addLeadingZero(hours)
+    	  timestamp += hours + ":";
+
+    	  let minutes = now.getMinutes().toString()
+    	  minutes = addLeadingZero(minutes)
+    	  timestamp += minutes + ":";
+
+    	  let seconds = now.getSeconds().toString()
+    	  seconds = addLeadingZero(seconds)
+    	  timestamp += seconds;
+  
+    	  return timestamp
+    	}
+	
+    function addLeadingZero(units) {
+    		if (units.length < 2) {
+    			units = "0" + units
+    		}
+    		return units
+    	}
+
+    
+    
+    
+    
+  </script>
+    
+
+
+      
+<script>
+  $('div').on('click', function() {
+      $(this).toggleClass('show-description');
+  });
+ 
+</script>
+
+</body>
+Aysha3.html
+Displaying Aysha.html. 
+Website Database ("back end")
+Ashwin Ramanathan
+•
+Nov 27, 2023 (Edited Dec 7, 2023)
+•
+Term 1
+Classwork
+•
+100
+/100
+100 points out of possible 100
+Due Dec 5, 2023, 3:15 PM
+Official start date: Tuesday, November 28th, 2023
+Three links below to connect each of your three websites to a database.
+This project will count for the third marking period, not the second.
+
+Submission instructions for each website:
+1) Screenshot of your database as shown at the very end of each tutorial
+2) html file
+
+Javascript and Firebase (for dash.generalassemb.ly Project 1 )
+Google Docs
+
+Javascript and Firebase (for dash.generalassemb.ly Project 2)
+Google Docs
+
+Javascript and Firebase (for dash.generalassemb.ly Project 3)
+Google Docs
+Your work
+Graded
+
+Screen Shot 2023-12-01 at 11.15.00 AM.png
+Image
+
+Screen Shot 2023-12-04 at 11.30.54 AM.png
+Image
+
+Aysha.html
+HTML
+
+Aysha2 (1).html
+HTML
+
+Aysha3.html
+HTML
